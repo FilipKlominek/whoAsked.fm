@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:body>
+    <table>
+        <tr>
+            <th>id</th>
+            <th>Full Name</th>
+        </tr>
+        <ui:repeat value="#{getUsersBean.users}" var="user">
+            <tr>
+                <td>
+                    #{user.userId}
+                </td>
+                <td>
+                    <h:link value="#{user.fullName}" outcome="user.xhtml" onclick="#{getDetailBean.getDetail(user.userId)}">
+                        <f:param name="id" value="#{user.userId}"/>
+                    </h:link>
+                </td>
+            </tr>
+        </ui:repeat>
+    </table>
+</h:body>
+</html>
