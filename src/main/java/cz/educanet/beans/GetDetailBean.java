@@ -14,8 +14,8 @@ import java.time.LocalDateTime;
 public class GetDetailBean implements Serializable {
 
     private int currentId = -1;
-    private String fullName = "test";
-    private String bio = "bio";
+    private String fullName = "invalid user id selected";
+    private String bio = "try accessing this page via link on index.xhtml or entering a valid id";
     private int questionCount = -1;
     private LocalDateTime updatedAt;
 

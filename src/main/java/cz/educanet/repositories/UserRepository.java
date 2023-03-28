@@ -54,8 +54,7 @@ public class UserRepository implements Serializable {
                 "SELECT u.userId, u.fullName, u.bio, COUNT(q.questionId), u.updatedAt " +
                         "FROM ask.user AS u " +
                         "JOIN ask.question AS q ON (q.authorId = u.userId) " +
-                        "WHERE u.userId = ? " +
-                        "GROUP BY u.userId"
+                        "WHERE u.userId = ? "
         );
 
         preparedStatement.setMaxRows(1);

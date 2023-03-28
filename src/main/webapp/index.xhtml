@@ -16,7 +16,7 @@
                     #{user.userId}
                 </td>
                 <td>
-                    <h:link value="#{user.fullName}" outcome="user.xhtml" onclick="#{getDetailBean.getDetail(user.userId)}">
+                    <h:link value="#{user.fullName}" outcome="user.xhtml">
                         <f:param name="id" value="#{user.userId}"/>
                     </h:link>
                 </td>
