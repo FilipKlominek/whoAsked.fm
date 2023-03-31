@@ -29,12 +29,13 @@ public class UserRepository implements Serializable {
             users.add(new User(
                     resultSet.getInt(1),
                     resultSet.getString(2),
-                    resultSet.getString(3),
+                    resultSet.getString(3).substring(0, 64), //the hashed password
                     resultSet.getString(4),
                     resultSet.getString(5),
                     resultSet.getString(6),
                     LocalDateTime.parse(resultSet.getString(7).replace(" ", "T")),
-                    LocalDateTime.parse(resultSet.getString(8).replace(" ", "T"))
+                    LocalDateTime.parse(resultSet.getString(8).replace(" ", "T")),
+                    resultSet.getString(3).substring(64) //the salt
             ));
         }
 
@@ -77,5 +78,24 @@ public class UserRepository implements Serializable {
         resultSet.close();
 
         return users.get(0);
+    }
+
+    public void addUser(String name, String email, String unHashedPassword) throws SQLException {
+
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/users?user=root&password=");
+
+        User user = new User(name, email, unHashedPassword); //password gets hashed in constructor and salt gets generated
+
+        PreparedStatement preparedStatement = connection.prepareStatement(
+                "INSERT INTO ask.user (fullName, Email, hashedPassword, createdAt, updatedAt)" +
+                        "VALUES (?, ?, ?, NOW(), NOW())"
+        );
+
+        preparedStatement.setString(1, user.getFullName());
+        preparedStatement.setString(2, user.getEmail());
+        preparedStatement.setString(3, user.getHashedPassword() + user.getSalt()); //salt is stored in the same column after the password
+
+        preparedStatement.close();
+        connection.close();
     }
 }

@@ -1,21 +1,24 @@
 package cz.educanet.models;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 import java.time.LocalDateTime;
+import java.util.Random;
 
 public class User {
 
-    private final int userId;
-    private  String email = "";
-    private  String hashedPassword = "";
-    private final String fullName;
-    private final String bio;
-    private  String picture = "";
-    private final LocalDateTime createdAt;
-    private  LocalDateTime updatedAt = null;
+    private int userId = -1;
+    private String email = "";
+    private String hashedPassword = "";
+    private String fullName;
+    private String bio = "";
+    private String picture = "";
+    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime updatedAt = null;
+    private String salt = "";
+    private int questionCount = -1;
 
-    private final int questionCount;
-
-    public User(int userId, String email, String hashedPassword, String fullName, String bio, String picture, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public User(int userId, String email, String hashedPassword, String fullName, String bio, String picture, LocalDateTime createdAt, LocalDateTime updatedAt, String salt) {
         this.userId = userId;
         this.email = email;
         this.hashedPassword = hashedPassword;
@@ -33,6 +36,32 @@ public class User {
         this.bio = bio;
         this.questionCount = questionCount;
         this.createdAt = createdAt;
+    }
+
+    public User(String name, String email, String unHashedPassword) {
+        this.fullName = name;
+        this.email = email;
+        this.hashedPassword = this.hash(unHashedPassword);
+    }
+
+    private String hash(String unHashedPassword) {
+        return DigestUtils.sha256Hex(unHashedPassword + this.generateSalt());
+    }
+
+    private String generateSalt() {
+        int length = 32;
+
+        Random rn = new Random();
+
+        StringBuilder salt = new StringBuilder();
+
+        for (int i = 0; i < length; i++) {
+            salt.append((char) rn.nextInt());
+        }
+
+        this.salt = salt.toString();
+
+        return salt.toString();
     }
 
     public int getUserId() {
@@ -69,5 +98,9 @@ public class User {
 
     public int getQuestionCount() {
         return questionCount;
+    }
+
+    public String getSalt() {
+        return salt;
     }
 }

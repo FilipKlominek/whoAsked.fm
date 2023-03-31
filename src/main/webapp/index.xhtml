@@ -5,11 +5,15 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:body>
+    <h:link value="Login" outcome="login.xhtml"/>
+    <h:link value="Register" outcome="register.xhtml"/>
+    <h2>Users</h2>
     <table>
         <tr>
             <th>id</th>
             <th>Full Name</th>
         </tr>
+
         <ui:repeat value="#{getUsersBean.users}" var="user">
             <tr>
                 <td>
