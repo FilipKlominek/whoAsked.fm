@@ -18,5 +18,11 @@
     <div>Last activity:
         #{getDetailBean.updatedAt}
     </div>
+    <h2>Ask a question</h2>
+    <h:form>
+        <h:inputText value="#{questionBean.text}"/>
+        <h:commandButton type="submit"/>
+    </h:form>
+
 </h:body>
 </html>

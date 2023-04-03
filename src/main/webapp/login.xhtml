@@ -2,11 +2,28 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
 <h:body>
     <h:link value="Home" outcome="index.xhtml"/>
+    <h1>Login</h1>
+    <h:form>
+        <div>
+            <h:outputLabel>Full Name</h:outputLabel>
+            <h:inputText type="username" value="#{userBean.name}" label="Username"/>
+        </div>
+        <div>
+            <h:outputLabel>Email</h:outputLabel>
+            <h:inputText type="email" value="#{userBean.email}" label="Email"/>
+        </div>
+        <div>
+            <h:outputLabel>Password</h:outputLabel>
+            <h:inputText type="password" value="#{userBean.unHashedPasswordTest}" label="Password"/>
+        </div>
+        <div>
+            <h:commandButton type="submit" onclick="#{userBean.login()}" value="Login"/>
+        </div>
 
-
+        <a href="register.xhtml">Don't have an account? Register here!</a>
+    </h:form>
 </h:body>
 </html>

@@ -20,20 +20,19 @@ public class RegisterBean implements Serializable {
     private String confirmUnHashedPassword = "";
 
 
-
     public boolean register() throws SQLException {
 
-        if (this.name.equals("") || this.email.equals("") || this.unHashedPassword.equals("") || this.confirmUnHashedPassword.equals(""))
+        if (this.name.equals("") || this.email.equals("") || this.unHashedPassword.equals("") || this.confirmUnHashedPassword.equals("")) {
             return false;
+        }
 
-        if (!this.unHashedPassword.equals(this.confirmUnHashedPassword)) return false;
+        if (!this.unHashedPassword.equals(this.confirmUnHashedPassword)) {
+            return false;
+        }
+
+        System.out.println(name + " " + email + " " + unHashedPassword + " " + confirmUnHashedPassword);
 
         userRepository.addUser(this.name, this.email, this.unHashedPassword);
-
-        this.name = "";
-        this.email = "";
-        this.unHashedPassword = "";
-        this.confirmUnHashedPassword = "";
 
         return true;
     }
@@ -62,11 +61,11 @@ public class RegisterBean implements Serializable {
         this.unHashedPassword = unHashedPassword;
     }
 
-    public String getConfirmUnHashedPassword() {
+    public String getConfirm() {
         return confirmUnHashedPassword;
     }
 
-    public void setConfirmUnHashedPassword(String confirmUnHashedPassword) {
+    public void setConfirm(String confirmUnHashedPassword) {
         this.confirmUnHashedPassword = confirmUnHashedPassword;
     }
 }

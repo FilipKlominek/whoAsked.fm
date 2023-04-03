@@ -95,6 +95,8 @@ public class UserRepository implements Serializable {
         preparedStatement.setString(2, user.getEmail());
         preparedStatement.setString(3, user.getHashedPassword() + user.getSalt()); //salt is stored in the same column after the password
 
+        preparedStatement.execute();
+
         preparedStatement.close();
         connection.close();
     }

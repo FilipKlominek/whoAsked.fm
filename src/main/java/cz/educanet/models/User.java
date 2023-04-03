@@ -10,7 +10,7 @@ public class User {
     private int userId = -1;
     private String email = "";
     private String hashedPassword = "";
-    private String fullName;
+    private String fullName = "";
     private String bio = "";
     private String picture = "";
     private LocalDateTime createdAt = LocalDateTime.now();
