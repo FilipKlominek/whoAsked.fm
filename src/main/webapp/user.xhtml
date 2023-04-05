@@ -7,21 +7,21 @@
 <h:body>
     <h:link value="Back" outcome="index.xhtml"/>
     <h1>
-        #{getDetailBean.getDetail(param['id']).fullName}
+        #{detailBean.getDetail(param['id']).fullName}
     </h1>
     <p>
-        #{getDetailBean.bio}
+        #{detailBean.bio}
     </p>
     <div>
-        #{getDetailBean.questionCount}
+        #{detailBean.questionCount}
     </div>
     <div>Last activity:
-        #{getDetailBean.updatedAt}
+        #{detailBean.updatedAt}
     </div>
     <h2>Ask a question</h2>
     <h:form>
         <h:inputText value="#{questionBean.text}"/>
-        <h:commandButton type="submit"/>
+        <h:commandButton value="Submit" type="submit" action="#{questionBean.ask}"/>
     </h:form>
 
 </h:body>

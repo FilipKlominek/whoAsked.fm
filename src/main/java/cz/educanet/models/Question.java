@@ -11,6 +11,12 @@ public class Question {
     private LocalDateTime createdAt = LocalDateTime.now();
     private LocalDateTime updatedAt = null;
 
+    public Question(String question, int authorId, int targetId) {
+        this.question = question;
+        this.authorId = authorId;
+        this.targetId = targetId;
+    }
+
     public Question(int questionId, String question, String answer, int authorId, int targetId, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.questionId = questionId;
         this.question = question;

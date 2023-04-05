@@ -2,16 +2,19 @@ package cz.educanet.beans;
 
 import cz.educanet.models.User;
 import cz.educanet.repositories.UserRepository;
+import jakarta.annotation.ManagedBean;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.annotation.ManagedProperty;
 import jakarta.inject.Named;
 
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 
+@ManagedBean
 @Named
 @SessionScoped
-public class GetDetailBean implements Serializable {
+public class DetailBean implements Serializable {
 
     private int currentId = -1;
     private String fullName = "invalid user id selected";

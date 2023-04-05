@@ -2,6 +2,7 @@ package cz.educanet.beans;
 
 import cz.educanet.models.User;
 import cz.educanet.repositories.UserRepository;
+import jakarta.annotation.ManagedBean;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -10,12 +11,13 @@ import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
 
+@ManagedBean
 @Named
 @SessionScoped
 public class UserBean implements Serializable {
     private boolean isLoggedIn = false;
 
-    private int currentUser = -1;
+    private int loggedUser = -1;
 
     private final UserRepository usersRepository = new UserRepository();
     private String name = "";
@@ -33,7 +35,7 @@ public class UserBean implements Serializable {
 
             if (u.getFullName().equals(this.name) && u.getEmail().equals(this.getEmail())) {
                 if (u.getHashedPassword().equals(this.hash(this.unHashedPasswordTest + u.getSalt()))) {
-                    this.currentUser = u.getUserId();
+                    this.loggedUser = u.getUserId();
                     this.isLoggedIn = true;
                     return true;
                 }
@@ -86,11 +88,11 @@ public class UserBean implements Serializable {
         this.unHashedPasswordTest = unHashedPasswordTest;
     }
 
-    public int getCurrentUser() {
-        return currentUser;
+    public int getLoggedUser() {
+        return loggedUser;
     }
 
-    public void setCurrentUser(int currentUser) {
-        this.currentUser = currentUser;
+    public void setLoggedUser(int currentUser) {
+        this.loggedUser = currentUser;
     }
 }
